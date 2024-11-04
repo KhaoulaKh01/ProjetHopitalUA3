@@ -1,0 +1,293 @@
+﻿<Window x:Class="ProjetHopitalUA3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjetHopitalUA3"
+        mc:Ignorable="d"
+        Title="Gestion d'hôpital" FontSize="18" Height="650" Width="800" 
+        WindowStyle="None" 
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
+    <Border Background="LightBlue" CornerRadius="20">
+        <Grid Height="650" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <!-- Ajout d'une colonne pour le bouton -->
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <!-- Définition des lignes -->
+            </Grid.RowDefinitions>
+
+            <DockPanel>
+
+                <StatusBar DockPanel.Dock="Bottom">
+                    <StatusBar.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </StatusBar.ItemsPanel>
+                    <StatusBarItem>
+                        <TextBlock Name="statusMessage">Message:</TextBlock>
+                    </StatusBarItem>
+                    <StatusBarItem Grid.Column="2">
+                        <TextBlock Name="statusAction">Action!</TextBlock>
+                    </StatusBarItem>
+                </StatusBar>
+                <Border Background="LightBlue" CornerRadius="20">
+                    <Grid Height="613" VerticalAlignment="Bottom">
+                        <!--Le contenu de la page-->
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <!--ligne pour le Menu choisir auto comme Hauteur-->
+                            <RowDefinition Height="auto"/>
+                            <!--Ligne pour le ToolBar choisir auto comme Hauteur-->
+                            <RowDefinition/>
+                            <!--ligne pour le TabControl-->
+                        </Grid.RowDefinitions>
+
+                        <!--Creer un menu avec un seul MenuItem Cours et 3 sous menuItems :-->
+                        <!--Nouveau: pour vider les champs-->
+                        <!--Ajouter pour inserer le cours dans le DataGrid-->
+
+
+
+                        <Menu Grid.Row="0" Background="Beige">
+
+                            <MenuItem Header="Spécialité" FontSize="20" FontWeight="Bold" Foreground="Blue" Height="50" Click="MenuItemSpecialite_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/specialite.png" Width="20" Height="20"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                            <MenuItem Header="Médecin" FontSize="20" FontWeight="Bold" Foreground="Blue" Height="50" Click="MenuItemMedecin_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/médecin.png" Width="20" Height="20"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                            <MenuItem Header="Consultation" FontSize="20" FontWeight="Bold" Foreground="Blue" Height="50" Click="MenuItemConsultation_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/consultation.png" Width="20" Height="20"/>
+                                </MenuItem.Icon>
+
+                            </MenuItem>
+                            <Button Width="40" Height="40" Margin="2" HorizontalAlignment="Right" VerticalAlignment="Top" Click="btnReset_Click">
+                                <Image Source="/reset.png"/>
+                            </Button>
+
+
+                        </Menu>
+                        <!--button close-->
+                        <Button x:Name="btnClose" Style="{StaticResource buttonStyle0}" Grid.Column="4" Width="25" Height="25" Click="btnClose_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0">
+                            <Image Source="/close.png" />
+                        </Button>
+
+                        <TabControl x:Name="tabControlPrincipal" Grid.Row="2" Background="Beige" Margin="2">
+                            <!--Creation de la TabControl-->
+                            <TabItem Header="Spécialité" Width="120">
+                                <Grid>
+
+                                    <!--Creation d'une grille de 4 lignes-->
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour Implementer le ID -->
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour Nom-->
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour la description-->
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour Ajouter ou Nouvelle spécialité-->
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <!--Pour Implementer la DataGrid dedans-->
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Orientation="Horizontal" Margin="2">
+                                        <Label Content="Identifiant" Width="110"/>
+                                        <TextBox Name="tbIdentifiantSpecialite" Width="150"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="2" Grid.ColumnSpan="2" Grid.Row="1">
+                                        <!--StackPanel pour textBox et son Label,orientation Horizontal pour qu'ils soient sur la meme ligne-->
+                                        <Label Content="Nom" Width="110"/>
+                                        <TextBox x:Name="tbNomSpecialite" Width="150"/>
+                                    </StackPanel>
+
+                                    <!--StackPanel pour textBox Description et son Label,orientation Horizontal pour qu'ils soient sur la meme ligne-->
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="2" Grid.ColumnSpan="2">
+                                        <Label Content="Description" Width="110"/>
+                                        <TextBox x:Name="tbDescription" Width="300"/>
+                                    </StackPanel>
+
+                                    <!--StackPanel pour implementer les trois bouttons-->
+                                    <StackPanel Orientation="Horizontal" Grid.Row="3"  Margin="2" >
+                                        <Button x:Name="btnAjouterSpecialite" Content="Ajouter" Margin="2" Width="100" Click="btnAjouterSpecialite_Click"/>
+                                        <Button x:Name="btnModifierSpecialite" Content="Modifier" Margin="2" Width="100" Click="btnModifierSpecialite_Click"/>
+                                        <Button x:Name="btnSupprimerSpecialite" Content="Supprimer" Margin="2" Width="100" Click="btnSupprimerSpecialite_Click"/>
+                                    </StackPanel>
+
+                                    <DataGrid Name="dgSpecialite" Grid.Row="6"  Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="CornflowerBlue" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto" SelectionMode="Single"
+                         BorderBrush="Gray" BorderThickness="5" IsReadOnly="True" CanUserSortColumns = "False"   AreRowDetailsFrozen="True" CanUserResizeColumns="False"  CanUserReorderColumns="True"  FrozenColumnCount="2"  Margin="2" SelectionChanged="dgSpecialite_SelectionChanged">
+
+                                        
+                                    </DataGrid>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Médecin" Width="120">
+                                <!--TabItem pour ajouter, modifier, supprimer un médecin-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="59*"/>
+                                        <ColumnDefinition Width="336*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <!--Definir le nombre de ligne dont on a besoin pour saisir les champs:Identifiant,Nom,Prénom,Spécialité,Téléphone,Salaire-->
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+
+
+                                    <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Grid.ColumnSpan="2">
+                                        <Label Content="Identifiant" Width="110"/>
+                                        <TextBox Name="tbIdentifiantMedecin" Width="150" />
+
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Grid.Row="1" Grid.ColumnSpan="2">
+                                        <!--stackPanel pour creer un Label pour definir le champ et un textbox pour saisir le Nom-->
+                                        <Label Content="Nom" Width="110"/>
+                                        <TextBox x:Name="tbNomMedecin" Width="150"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="2,2,2,2" Grid.ColumnSpan="2">
+                                        <!--un stackPanel pour contenir: Label pour definir le champ et un textbox pour saisir la valeur-->
+                                        <Label Content="Prénom" Width="110"/>
+                                        <TextBox x:Name="tbPrenomMedecin" Width="150"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Grid.Row="3" Grid.ColumnSpan="2">
+                                        <Label Content="Spécialité" Width="110" />
+                                        <ComboBox x:Name="cmbSpecialiteMedecin" Width="150" Margin="5" />
+                                    </StackPanel>
+
+
+                                    <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="2,2,2,2" Grid.ColumnSpan="2">
+                                        <!--un stackPanel pour contenir: Label pour definir le champ et un textbox pour saisir la valeur-->
+                                        <Label Content="Téléphone" Width="110"/>
+                                        <TextBox x:Name="tbTelephoneMedecin" Width="150"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Grid.Row="5" Margin="2,2,2,2" Grid.ColumnSpan="2">
+                                        <!--un stackPanel pour contenir: Label pour definir le champ et un textbox pour saisir la valeur-->
+                                        <Label Content="Salaire" Width="110"/>
+                                        <TextBox x:Name="tbSalaireMedecin" Width="150"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="2,2,2,2" Grid.Row="6" Grid.ColumnSpan="2">
+                                        <Button x:Name="btnAjouterMedecin" Content="Ajouter" Width="100" Margin="2" Click="btnAjouterMedecin_Click"/>
+                                        <Button x:Name="btnModifierMedecin" Content="Modifier" Width="100" Margin="2" Click="btnModifierMedecin_Click"/>
+                                        <Button x:Name="btnSupprimerMedecin" Content="Supprimer" Width="100" Margin="2" Click="btnSupprimerMedecin_Click"/>
+                                    </StackPanel>
+                                    <DataGrid Name="dgMedecin" Grid.Row="7"  Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="CornflowerBlue" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto" SelectionMode="Single" 
+                                  BorderBrush="Gray" BorderThickness="3" IsReadOnly="True" CanUserSortColumns = "False"   AreRowDetailsFrozen="True" CanUserResizeColumns="False"  CanUserReorderColumns="True"  FrozenColumnCount="6"  Margin="2,2,2,2" Grid.ColumnSpan="2" SelectionChanged="dgMedecin_SelectionChanged">
+                                        
+
+                                    </DataGrid>
+                                </Grid>
+                            </TabItem>
+
+
+                            <TabItem Header="Consultation" Width="120">
+                                <Grid>
+
+                                    <!--Creation d'une grille de 4 lignes-->
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour Implementer  -->
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour le titre -->
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour la descri-->
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour -->
+                                        <RowDefinition Height="auto"/>
+                                        <!--Pour -->
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <!--Pour Implementer la DataGrid dedans-->
+                                    </Grid.RowDefinitions>
+
+                                    <!--stackPanel pour rechercher une specialite a partie de la liste-->
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="2" Grid.ColumnSpan="2">
+                                        <Label Content="Liste Spécialités" Width="150" FontWeight="Bold"/>
+                                        <ComboBox Name="cbMedecinSpecialite" Width="150" />
+									</StackPanel>
+									<!-- StackPanel pour le champ de salaire -->
+									<StackPanel Grid.Row="3" Orientation="Horizontal" Margin="2" Grid.ColumnSpan="2">
+										<Label Content="Salaire" Width="150" FontWeight="Bold"/>
+										<TextBox Name="tbSalaireConsultation" Width="100" Margin="2"/>
+										
+									</StackPanel>
+										<!-- CheckBoxes -->
+									<!-- StackPanel pour les options de salaire -->
+										<StackPanel Grid.Row="4" Orientation="Horizontal" Margin="2">
+											<Label Content="Choisissez une option :" FontWeight="Bold" VerticalAlignment="Center" Margin="2" Grid.Row="0"/>
+											<CheckBox Name="chkSalaireEgal" Content="Égal" VerticalAlignment="Center" Margin="2" Checked="CheckBox_Checked"/>
+											<CheckBox Name="chkSalaireInferieur" Content="Inférieur" VerticalAlignment="Center" Margin="2" Checked="CheckBox_Checked"/>
+											<CheckBox Name="chkSalaireSuperieur" Content="Supérieur" VerticalAlignment="Center" Margin="2" Checked="CheckBox_Checked"/>
+											<Button x:Name="btnRecherche" Content="Rechercher" Width="100" Margin="2" Click="btnRecherche_Click"/>
+										</StackPanel>
+									
+                                   
+
+                                    <!-- DataGrid pour afficher la liste des médecins -->
+
+                                    <DataGrid Name="dgListeMedecins" Grid.Row="5"  AutoGenerateColumns="False" Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="CornflowerBlue" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto" SelectionMode="Single" 
+          BorderBrush="Gray" BorderThickness="3" IsReadOnly="True" CanUserSortColumns = "False"   AreRowDetailsFrozen="True" CanUserResizeColumns="False"  CanUserReorderColumns="True"  FrozenColumnCount="6"  Margin="2,2,2,2" Grid.ColumnSpan="2" >
+
+										<DataGrid.Columns>
+											<DataGridTextColumn Header="Identifiant" Width="auto" Binding="{Binding Path=Identifiant}"/>
+											<DataGridTextColumn Header="Nom " Width="auto" Binding="{Binding Path=Nom}"/>
+											<DataGridTextColumn Header="Prenom" Width="auto" Binding="{Binding Path=Prenom}"/>
+											<DataGridTextColumn Header="Specialite " Width="auto" Binding="{Binding Path=Specialite}"/>
+											<DataGridTextColumn Header="Telephone " Width="auto" Binding="{Binding Path=Telephone}"/>
+											<DataGridTextColumn Header="Salaire" Width="auto" Binding="{Binding Path=Salaire}"/>
+										</DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </TabItem>
+
+                        </TabControl>
+                    </Grid>
+                </Border>
+            </DockPanel>
+
+        </Grid>
+    </Border>
+</Window>
+
+
