@@ -16,7 +16,7 @@ A desktop application built with **WPF** and **C#** for managing hospital operat
 
 ## Screenshots
 
-![Main Interface]([images/main_interface.png](https://github.com/KhaoulaKh01/ProjetHopitalUA3/blob/master/gestionHopital.png)
+![Main Interface]([images/main_interface.png](gestionHopital.png)
 
 ---
 
