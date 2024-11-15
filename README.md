@@ -14,10 +14,12 @@ A desktop application built with **WPF** and **C#** for managing hospital operat
 - **C#**
 - **SQL Server**
 
-## Screenshots
 
-![Main Interface]([images/main_interface.png](gestionHopital.png)
+## Preview  
+Here is a screenshot of the Hospital Management System application:  
 
----
+![gestionHopital](https://github.com/user-attachments/assets/7a899621-bb82-48db-9e83-5bf40a017ba6)
+
+
 
 This project helped me learn WPF, SQL Server integration, and interface management in C#.
